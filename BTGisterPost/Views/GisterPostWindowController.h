@@ -27,24 +27,29 @@
 #import "UserCredential.h"
 #import "LoginProtocol.h"
 
+
+static Class DVTSourceTextViewClass;
+static Class IDESourceCodeEditorClass;
+static Class IDEApplicationClass;
+static Class IDEWorkspaceWindowControllerClass;
+
 @interface GisterPostWindowController : NSWindowController <NSUserNotificationCenterDelegate, LoginProtocol, NSTextViewDelegate>
 
 //@property (nonatomic, assign) id<LoginProtocol> delegate;
 
 @property (nonatomic, copy) NSString *gistText;
 
-@property (nonatomic, retain) UserCredential *userCredential;
+@property (nonatomic, strong) UserCredential *userCredential;
 
-@property (assign) IBOutlet NSView *commitView;
+@property (strong) IBOutlet NSView *commitView;
 
-@property (assign) IBOutlet NSWindow *mainWindow;
+@property (strong) IBOutlet NSWindow *mainWindow;
 
-@property (assign) IBOutlet NSButton *privateGistCheckBox;
+@property (strong) IBOutlet NSButton *privateGistCheckBox;
 
-@property (assign) IBOutlet NSTextField *gistDescriptionTextField;
+@property (strong) IBOutlet NSTextField *gistDescriptionTextField;
 
-@property (assign) IBOutlet NSTextField *fileNameTextField;
-
+@property (strong) IBOutlet NSTextField *fileNameTextField;
 
 - (IBAction)CommitGistButtonPushed:(id)sender;
 

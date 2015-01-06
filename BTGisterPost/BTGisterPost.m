@@ -29,8 +29,8 @@
 
 @interface BTGisterPost ()
 
-@property (nonatomic, retain) UserCredential *userCredential;
-@property (nonatomic, retain) GisterPostWindowController *gistPostController;
+@property (nonatomic, strong) UserCredential *userCredential;
+@property (nonatomic, strong) GisterPostWindowController *gistPostController;
 
 @end
 
@@ -73,7 +73,6 @@
         [newMenuItem setTarget:self];
         [newMenuItem setKeyEquivalentModifierMask: NSAlternateKeyMask];
         [[editMenuItem submenu] addItem:newMenuItem];
-        [newMenuItem release];
     }
 }
 
@@ -104,10 +103,8 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    self.gistPostController = nil;
-    [self.gistPostController dealloc];
+    self.gistPostController;
     
-    [super dealloc];
 }
 
 @end

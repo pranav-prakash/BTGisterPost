@@ -22,9 +22,9 @@
 
 @interface BTGitHubEngine()
 @property BOOL isMultiPageRequest;
-@property (nonatomic, retain) NSURL *nextPageURL;
-@property (nonatomic, retain) NSURL *lastPageURL;
-@property (nonatomic, retain) NSMutableArray *multiPageArray;
+@property (nonatomic, strong) NSURL *nextPageURL;
+@property (nonatomic, strong) NSURL *lastPageURL;
+@property (nonatomic, strong) NSMutableArray *multiPageArray;
 @end
 
 
@@ -68,7 +68,6 @@
 	if (!_reachability)
 	{
 		_reachability = [[UAReachability alloc] init];
-        [_reachability retain];
 	}
 	return _reachability;
 }
@@ -471,8 +470,8 @@
 - (void)invoke:(void (^)(id obj))invocationBlock success:(UAGithubEngineSuccessBlock)successBlock failure:(UAGithubEngineFailureBlock)failureBlock
 {
     NSError *error = nil;
-    NSError **errorPointer = &error;
-    id result;
+    NSError * __strong *errorPointer = &error;
+    __unsafe_unretained id result;
     
     NSInvocation *invocation = [NSInvocation jr_invocationWithTarget:self block:invocationBlock];
     // Method signatures differ between invocations, but the last argument is always where the NSError lives
@@ -489,7 +488,7 @@
     while (self.isMultiPageRequest && self.nextPageURL)
     {
         [self.multiPageArray addObjectsFromArray:result];
-        NSMutableString *requestPath = [self.nextPageURL query] ? [[[self.nextPageURL path] stringByAppendingFormat:@"?%@", [self.nextPageURL query]] mutableCopy] : [[self.nextPageURL path] mutableCopy];
+        __unsafe_unretained NSMutableString *requestPath = [self.nextPageURL query] ? [[[self.nextPageURL path] stringByAppendingFormat:@"?%@", [self.nextPageURL query]] mutableCopy] : [[self.nextPageURL path] mutableCopy];
         [requestPath deleteCharactersInRange:NSMakeRange(0, 1)];
         
         [invocation setArgument:&requestPath atIndex:2];
@@ -535,24 +534,17 @@
 
 
 - (void)dealloc{
-    self.username = nil;
-    [self.username dealloc];
+    self.username;
     
-    self.password = nil;
-    [self.password dealloc];
+    self.password;
     
-    self.nextPageURL = nil;
-    [self.nextPageURL dealloc];
+    self.nextPageURL;
     
-    self.lastPageURL = nil;
-    [self.lastPageURL dealloc];
+    self.lastPageURL;
     
-    self.multiPageArray = nil;
-    [self.multiPageArray dealloc];
+    self.multiPageArray;
     
-    self.reachability = nil;
-    [self.reachability dealloc];
+    self.reachability;
     
-    [super dealloc];
 }
 @end

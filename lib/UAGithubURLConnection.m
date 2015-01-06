@@ -60,15 +60,5 @@
 	//});
 }
 
-- (void)dealloc{
-    _data = nil;
-    [_data release];
-    
-    _identifier = nil;
-    [_identifier dealloc];
-
-    
-    [super dealloc];    
-}
 
 @end

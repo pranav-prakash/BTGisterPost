@@ -53,18 +53,13 @@
 }
 - (void)dealloc
 {
-    self.gistText = nil;
-    [self.gistText dealloc];
+    self.gistText;
     
-    self.filename = nil;
-    [self.filename dealloc];
+    self.filename;
     
-    self.description = nil;
-    [self.description dealloc];
+    self.description;
     
-    self.gistUrlString = nil;
-    [self.gistUrlString dealloc];
+    self.gistUrlString;
     
-    [super dealloc];
 }
 @end

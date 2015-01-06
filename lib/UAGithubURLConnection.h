@@ -12,10 +12,10 @@
 @interface UAGithubURLConnection : NSURLConnection 
 
 
-@property (nonatomic, retain) NSMutableData *data;
+@property (nonatomic, strong) NSMutableData *data;
 @property (nonatomic) UAGithubRequestType requestType;
 @property (nonatomic) UAGithubResponseType responseType;
-@property (nonatomic, retain) NSString *identifier;
+@property (nonatomic, strong) NSString *identifier;
 
 + (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock failure:(id(^)(NSError *))failureBlock_;
 + (id)asyncRequest:(NSURLRequest *)request success:(id(^)(NSData *, NSURLResponse *))successBlock error:(NSError *__strong *)error;

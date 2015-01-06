@@ -31,20 +31,16 @@
 #import "NSAlert+EasyAlert.h"
 #import <IDEKit/IDEWorkspaceWindowController.h>
 #import <IDEKit/IDEEditorArea.h>
+#import <IDEKit/IDEEditorDocument.h>
 
 id objc_getClass(const char* name);
 
-static Class DVTSourceTextViewClass;
-static Class IDESourceCodeEditorClass;
-static Class IDEApplicationClass;
-static Class IDEWorkspaceWindowControllerClass;
-
 
 @interface GisterPostWindowController ()
-@property (nonatomic, retain) id ideWorkspaceWindow;
-@property (nonatomic, retain) BTGitHubEngine *githubEngine;
-@property (nonatomic, retain) NSUserNotificationCenter *notificationCenter;
-@property (nonatomic, retain) LoginWindowController *loginWindowController;
+@property (nonatomic, strong) id ideWorkspaceWindow;
+@property (nonatomic, strong) BTGitHubEngine *githubEngine;
+@property (nonatomic, strong) NSUserNotificationCenter *notificationCenter;
+@property (nonatomic, strong) LoginWindowController *loginWindowController;
 @end
 
 @implementation GisterPostWindowController
@@ -64,9 +60,9 @@ static Class IDEWorkspaceWindowControllerClass;
 {
     self = [super init];
     if (self) {
-        _notificationCenter = [[NSUserNotificationCenter defaultUserNotificationCenter] retain];
+        _notificationCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
         _notificationCenter.delegate = self;
-        _loginWindowController = [[[LoginWindowController alloc] initWithDelegate:self]retain];
+        _loginWindowController = [[LoginWindowController alloc] initWithDelegate:self];
         DVTSourceTextViewClass = objc_getClass("DVTSourceTextView");
         IDESourceCodeEditorClass = objc_getClass("IDESourceCodeEditor");
         IDEApplicationClass = objc_getClass("IDEApplication");
@@ -86,23 +82,17 @@ static Class IDEWorkspaceWindowControllerClass;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    self.githubEngine = nil;
-    [self.githubEngine dealloc];
+    self.githubEngine;
     
-    self.notificationCenter = nil;
-    [self.notificationCenter dealloc];
+    self.notificationCenter;
     
-    self.gistText = nil;
-    [self.gistText dealloc];
+    self.gistText;
     
-    self.userCredential = nil;
-    [self.userCredential dealloc];
+    self.userCredential;
     
-    self.loginWindowController = nil;
-    [self.loginWindowController dealloc];
+    self.loginWindowController;
     
-    self.ideWorkspaceWindow = nil;
-    [self.ideWorkspaceWindow dealloc];
+    self.ideWorkspaceWindow;
     
     self.mainWindow = nil;
     
@@ -113,7 +103,6 @@ static Class IDEWorkspaceWindowControllerClass;
     self.fileNameTextField = nil;
     self.commitView = nil;
     
-    [super dealloc];
 }
 
 #pragma mark - Helper
@@ -262,7 +251,7 @@ static Class IDEWorkspaceWindowControllerClass;
     
     BOOL isPublic = ![self.privateGistCheckBox state] == NSOnState;
     
-    Gist *gist = [[[Gist alloc]initWithGistText:gistText andFilename:filename andDescription:gistDescription isPrivate:isPublic] retain];
+    Gist *gist = [[Gist alloc]initWithGistText:gistText andFilename:filename andDescription:gistDescription isPrivate:isPublic];
     
     dispatch_queue_t workingQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
     dispatch_async(workingQueue,
@@ -285,7 +274,6 @@ static Class IDEWorkspaceWindowControllerClass;
                            }];
                        }
                    });
-    [gist release];
 }
 
 
@@ -319,7 +307,7 @@ static Class IDEWorkspaceWindowControllerClass;
                       self,                         // we’ll be our own delegate
                       NULL,                     // did-end selector
                       selector,                   // no need for did-dismiss selector
-                      window,                 // context info
+                      (__bridge void *)(window),                 // context info
                       additionalInfo);
     
     
@@ -352,12 +340,11 @@ static Class IDEWorkspaceWindowControllerClass;
 
 - (void)notifyWithText:(NSString *)text withTitle:(NSString *)title andSubTitle:(NSString *)subTitle{
     
-    NSUserNotification *notification = [[[NSUserNotification alloc]init] retain];
+    NSUserNotification *notification = [[NSUserNotification alloc]init];
     notification.title = title;
     notification.subtitle = subTitle;
     notification.informativeText = text;
     [self.notificationCenter deliverNotification:notification];
-    [notification release];
 }
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification

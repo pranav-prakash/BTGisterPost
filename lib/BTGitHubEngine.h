@@ -19,7 +19,7 @@ typedef void (^UAGithubEngineFailureBlock)(NSError *);
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *password;
-@property (nonatomic, retain) UAReachability *reachability;
+@property (nonatomic, strong) UAReachability *reachability;
 @property (nonatomic, assign, readonly) BOOL isReachable;
 
 - (id)initWithUsername:(NSString *)aUsername password:(NSString *)aPassword withReachability:(BOOL)withReach;
