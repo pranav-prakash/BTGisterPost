@@ -1,4 +1,4 @@
-## BTGisterPost (modded) for XCode 5.\*  
+## BTGisterPost (modded) for XCode 5
 
 Credits to original developer LogikBlitz.
 
@@ -6,9 +6,9 @@ His version of the plugin made for Xcode 5 did not seem to work correctly (poste
 
 I have not tested on Xcode 6 but assuming there haven't been too many changes it should work fine there also. Add the necessary DVTCompatibilityUUIDs to the info.plist file (run "defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID" to find it).
 
-## What is this (edit from original Readme file)\*  
+## What is this (edit from original Readme file)
 
-A small plug-in for Xcode 5.\* that allows for posting of Gist's directly from Xcode.
+A small plug-in for Xcode 5 that allows for posting of Gist's directly from Xcode.
 
 ### Getting started
 
