@@ -1,21 +1,24 @@
-## For XCode 5*
-Please checkout https://github.com/LogikBlitz/BTGisterPost_Xcode5 for XCode 5 support.
+## BTGisterPost (modded) for XCode 5.\*  
 
-## BTGisterPost for XCode 4.\*  
-A small plug-in for Xcode 4.\* that allows for posting of Gist's directly from Xcode.
-It is purposely meant to be very small and not to intrusive.
-It is not the most pretty little thing, but it gets the job done.   
-Think of it as your friendly Gist hammer:-D.  
+Credits to original developer LogikBlitz.
 
-__It has been tested in Xcode 4.6.2 on OS X 10.8\*__ but should work just fine in Xcode 4.\* and OS X 10.7 (Without user notifications).
+His version of the plugin made for Xcode 5 did not seem to work correctly (posted all gists anonymously and occasionally crashed, for me at least) so I converted his original Xcode4 version of the project to use ARC and added the necessary DVTCompatibility UUIDs for Xcode 5. It seems to work fine on my machine. Results may vary.
+
+I have not tested on Xcode 6 but assuming there haven't been too many changes it should work fine there also. Add the necessary DVTCompatibilityUUIDs to the info.plist file (run "defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID" to find it).
+
+## What is this (edit from original Readme file)\*  
+
+A small plug-in for Xcode 5.\* that allows for posting of Gist's directly from Xcode.
 
 ### Getting started
-If you just want to install the plug-in the best way is to use the XCode package manager [Alcatraz](http://mneorr.github.com/Alcatraz).
-This plug-in is available in the package list, just look for **BTGisterPost** and check it for installation.  
-You can also build the plug-in directly from the source:
+
+I have attached a plugin binary in the releases page and that is probably the easiest version to get it. 
+
+Alternatively, you can also build the plug-in directly from the source:
 * Clone this repository.
-* Open the project in Xcode 4+
-* Build the solution -- the plug-in will automatically be installed.
+* Open the project in Xcode 5+
+* Build the solution -- the plug-in will automatically be installed to `~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/`
+*   Hopefully you get no errors during build
 * Restart Xcode for the plug-in to be activated.
 
 #### How to use the plug-in
@@ -31,12 +34,9 @@ To post a gist the plug-in requires a **username*** and **password** to a valid 
 ### Uninstall
 To uninstall the plug-in simply delete it from the folder where it resides:
 `~/Library/Application\ Support/Developer/Shared/Xcode/Plug-ins/BTGisterPost.xcplugin`  
-Or if using **Alzatraz** just uncheck the plug-in in the package list, and it should be removed.  
-Remember to restart Xcode for the removal to take effect.
 
 ### Dependencies
-The plug-in uses a modified version of [UAGithubEngine](https://github.com/owainhunt/uagithubengine) for GitHub communication. The framework has been scaled down a bit, and converted to not use ARC, since ARC is not supported in Xcode plug-ins.
-
+The plug-in uses a modified version of [UAGithubEngine](https://github.com/owainhunt/uagithubengine) for GitHub communication. It is included within the source files.
 
 ### Contributions
 If you would like to contribute to the plug-in, simply fork the project and submit a pull request. See [GitHub help](https://help.github.com/articles/fork-a-repo)
