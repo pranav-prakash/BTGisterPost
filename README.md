@@ -1,12 +1,12 @@
 ## BTGisterPost (modded) for XCode 5
 
-Credits to original developer LogikBlitz.
+Credits to original developer LogikBlitz for the plugin from which this project is forked.
 
 His version of the plugin made for Xcode 5 did not seem to work correctly (posted all gists anonymously and occasionally crashed, for me at least) so I converted his original Xcode4 version of the project to use ARC and added the necessary DVTCompatibility UUIDs for Xcode 5. It seems to work fine on my machine. Results may vary.
 
 I have not tested on Xcode 6 but assuming there haven't been too many changes it should work fine there also. Add the necessary DVTCompatibilityUUIDs to the info.plist file (run "defaults read /Applications/Xcode.app/Contents/Info DVTPlugInCompatibilityUUID" to find it).
 
-## What is this (edit from original Readme file)
+## What is this
 
 A small plug-in for Xcode 5 that allows for posting of Gist's directly from Xcode.
 
